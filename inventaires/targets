@@ -1,0 +1,9 @@
+[www]
+deby-cli
+
+[php]
+fedora-cli
+
+[db:children]
+www
+php
