@@ -1,5 +1,5 @@
 [www]
-deby-cli
+deby-cli ansible_user=stagiaire
 
 [php]
 fedora-cli
@@ -7,3 +7,6 @@ fedora-cli
 [db:children]
 www
 php
+
+[php:vars]
+ansible_port=22
