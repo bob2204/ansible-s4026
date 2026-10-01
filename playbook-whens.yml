@@ -6,4 +6,6 @@
     - name: Clause when
       ansible.builtin.debug:
         msg: "Distribution OK"
-      when: ansible_facts['os_family'] | lower == 'debian'
+      when:
+        - ansible_facts['os_family'] | lower == 'debian' or apache_port == 80
+        - ansible_facts['distribution_major_version'] | int > 11
