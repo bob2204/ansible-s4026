@@ -15,3 +15,21 @@
       when:
         - ansible_facts['os_family'] | lower == 'debian' or apache_port == 80
         - ansible_facts['distribution_major_version'] | int > 11
+      tags:
+        - never
+
+    - name: Module non-idempotent
+      ansible.builtin.raw: date
+      changed_when: false
+      tags:
+        - never
+
+    - name: Gestion de l'état d'erreur
+      ansible.builtin.raw: grep "{{ item | default('root') }}" /etc/passwd
+      changed_when: false
+      register: result
+      failed_when: result.rc == 2
+
+    - name: Affichage du code retour
+      ansible.builtin.debug:
+        msg: "rc: {{ result.rc }}"
