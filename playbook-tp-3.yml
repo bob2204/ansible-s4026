@@ -14,3 +14,19 @@
         name: "{{ apache_service_name }}"
         enabled: true
         state: started
+
+    - name: Modification du port d'écoute
+      ansible.builtin.lineinfile:
+        dest: "{{ apache_config_port_file }}"
+        regex: ^Listen.+$
+        line: Listen {{ apache_port }}
+        backup: true
+      tags:
+        - config_port
+
+    - name: Redémarrage du service Apache
+      ansible.builtin.systemd:
+        name: "{{ apache_service_name }}"
+        state: restarted
+      tags:
+        - config_port
