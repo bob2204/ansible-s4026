@@ -1,0 +1,9 @@
+---
+- name: Acte I
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Module ping
+      ansible.builtin.ping:
+        data: OK
