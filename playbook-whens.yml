@@ -1,0 +1,9 @@
+---
+- name: Clauses when
+  hosts: all
+
+  tasks:
+    - name: Clause when
+      ansible.builtin.debug:
+        msg: "Distribution OK"
+      when: ansible_facts['os_family'] | lower == 'debian'
