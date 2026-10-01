@@ -1,0 +1,16 @@
+---
+- name: Installation apache2 sur deby-cli
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Installation d'Apache
+      ansible.builtin.package:
+        name: "{{ apache_package_name }}"
+        state: present
+
+    - name: Configuration du service Apache
+      ansible.builtin.systemd:
+        name: "{{ apache_service_name }}"
+        enabled: true
+        state: started

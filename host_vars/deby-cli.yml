@@ -1,1 +1,4 @@
 ansible_user: stagiaire
+testvar: debian
+apache_package_name: apache2
+apache_service_name: apache2
