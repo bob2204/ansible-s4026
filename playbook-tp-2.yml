@@ -1,0 +1,28 @@
+---
+- name: Micro-TP n°2
+  hosts: all
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Vérification de la présence du paquet acl
+      ansible.builtin.package:
+        name: acl
+        state: present
+
+    - name: Création du groupe ansible
+      ansible.builtin.group:
+        name: ansible
+
+    - name: Création du compte devops
+      ansible.builtin.user:
+        name: devops
+        group: ansible
+
+    - name: Copie du fichier data.txt
+      ansible.builtin.copy:
+        src: data.txt
+        dest: /home/devops/data.txt
+        owner: devops
+        group: ansible
+        mode: 0644
