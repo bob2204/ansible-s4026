@@ -29,7 +29,29 @@
       changed_when: false
       register: result
       failed_when: result.rc == 2
+      tags:
+        - never
 
     - name: Affichage du code retour
       ansible.builtin.debug:
         msg: "rc: {{ result.rc }}"
+      tags:
+        - never
+
+    - name: Clause block...rescue...always
+      block:
+        - name: On teste
+          ansible.builtin.raw: grep "{{ item | default('root') }}" /etc/passwd
+      rescue:
+        - name: Seconde chance
+          ansible.builtin.debug:
+            msg: "On peut rejouer..."
+          failed_when: true
+      always:
+        - name: À faire quoi qu'il advienne
+          ansible.builtin.debug:
+            msg: "J'ai pas fini..."
+
+    - name: Tâche finale... si on arrive jusque là
+      ansible.builtin.debug:
+        msg: "Fini !"
