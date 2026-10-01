@@ -23,10 +23,22 @@
         backup: true
       tags:
         - config_port
+      notify:
+        - restart_apache
 
+    - name: On force l'exécution des handlers à ce point
+      ansible.builtin.meta: flush_handlers
+      tags: always
+
+    - name: Tâche finale
+      ansible.builtin.debug:
+        msg: Fin du traitement
+      tags: always
+
+  handlers:
     - name: Redémarrage du service Apache
       ansible.builtin.systemd:
         name: "{{ apache_service_name }}"
         state: restarted
-      tags:
-        - config_port
+      listen:
+        - restart_apache
