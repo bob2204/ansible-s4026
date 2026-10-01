@@ -1,0 +1,32 @@
+---
+- name: Installation apache2 sur deby-cli
+  hosts: deby-cli
+  become: true
+
+  tasks:
+    - name: Installation du paquet apache2
+      ansible.builtin.package:
+        name: apache2
+        state: present
+
+    - name: Configuration du service apache2
+      ansible.builtin.systemd:
+        name: apache2
+        enabled: true
+        state: started
+
+- name: Installation httpd sur fedora-cli
+  hosts: fedora-cli
+  become: true
+
+  tasks:
+    - name: Installation du paquet httpd
+      ansible.builtin.package:
+        name: httpd
+        state: present
+
+    - name: Configuration du service httpd
+      ansible.builtin.systemd:
+        name: httpd
+        enabled: true
+        state: started
