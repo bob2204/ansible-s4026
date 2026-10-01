@@ -1,0 +1,15 @@
+---
+- name: Exemples de loop
+  hosts: deby-cli
+
+  tasks:
+    - name: On itère
+      ansible.builtin.debug:
+        msg: "Élément n°{{ idx + 1 }}: {{ rang }}"
+      loop:
+        - un
+        - deux
+        - trois
+      loop_control:
+        loop_var: rang
+        index_var: idx
