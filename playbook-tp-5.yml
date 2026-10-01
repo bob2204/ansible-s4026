@@ -1,0 +1,12 @@
+---
+- name: Micro-TP n°5
+  hosts: all
+
+  tasks:
+    - name: Affichage des interfaces autres que 'lo'
+      ansible.builtin.debug:
+        msg: "{{ item }}: {{ ansible_facts[item].ipv4.address }}"
+      loop: "{{ ansible_facts.interfaces }}"
+      when:
+        - item != 'lo'
+        - ansible_facts[item].ipv4.address is defined
