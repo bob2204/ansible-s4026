@@ -1,0 +1,12 @@
+---
+- name: Les facts
+  hosts: all
+
+  tasks:
+    - name: Nommage ancienne méthode
+      ansible.builtin.debug:
+        msg: "Distribution: {{ ansible_distribution }}"
+
+    - name: Nommage nouvelle méthode
+      ansible.builtin.debug:
+        msg: "Distribution: {{ ansible_facts['distribution'] }}"
