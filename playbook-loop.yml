@@ -3,13 +3,14 @@
   hosts: deby-cli
 
   tasks:
-    - name: On itère
+    - name: Chargement du tableau logins
+      ansible.builtin.include_vars:
+        file: logins.yml
+
+    - name: Affichage de chaque login
       ansible.builtin.debug:
-        msg: "Élément n°{{ idx + 1 }}: {{ rang }}"
-      loop:
-        - un
-        - deux
-        - trois
+        msg: "Login n°{{ idx + 1 }}: {{ user.login }} dans {{ user.home }}"
+      loop: "{{ logins }}"
       loop_control:
-        loop_var: rang
+        loop_var: user
         index_var: idx
