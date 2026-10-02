@@ -1,0 +1,9 @@
+---
+- name: Micro-TP n°10
+  hosts: all
+
+  tasks:
+    - name: Fichier /tmp/hosts.txt
+      ansible.builtin.template:
+        src: hosts.txt
+        dest: /tmp/hosts.txt

@@ -1,0 +1,2 @@
+# Fichier hosts.txt
+{{ ansible_facts['enp0s8'].ipv4.address }} {{ ansible_facts['hostname'] }}
