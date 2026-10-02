@@ -1,0 +1,24 @@
+---
+- name: Acte-I
+  hosts: all
+
+  tasks:
+    - name: T-I
+      ansible.builtin.debug:
+        msg: "T-I"
+
+    - name: T-II
+      ansible.builtin.debug:
+        msg: "T-II"
+      failed_when: inventory_hostname == 'fedora-cli'
+
+    - name: T-III
+      ansible.builtin.debug:
+        msg: "T-III"
+
+    # Le module file doit agir en local et non sur une cible => delegate_to
+    - name: Suppression de l'éventuel retry-file
+      ansible.builtin.file:
+        name: retry.d/playbook-limit.retry
+        state: absent
+      delegate_to: localhost
