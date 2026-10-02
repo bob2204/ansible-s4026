@@ -1,0 +1,11 @@
+---
+- name: Micro-TP n°10
+  hosts: all
+
+  tasks:
+    - name: Fichier /tmp/hosts.txt
+      ansible.builtin.copy:
+        content: |
+          # Fichier hosts.txt
+          {{ ansible_facts['enp0s8'].ipv4.address }} {{ ansible_facts['hostname'] }}
+        dest: /tmp/hosts.txt
