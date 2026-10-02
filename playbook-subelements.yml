@@ -1,0 +1,30 @@
+---
+- name: Boucles imbriquées
+  hosts: deby-cli
+  become: true
+
+  tasks:
+    - name: Chargement de la variable logins
+      ansible.builtin.include_vars:
+        file: logins.yml
+
+    - name: Affichage des groupes
+      ansible.builtin.debug:
+        msg: " Groupe: {{ item[0].login }} {{ item[1] }}"
+      loop: "{{ logins | subelements('groups') }}"
+      tags: never
+
+    - name: Création des groupes
+      ansible.builtin.group:
+        name: "{{ item[1] }}"
+      loop: "{{ logins | subelements('groups') }}"
+      tags: never
+
+    - name: Mise à jour des comptes
+      ansible.builtin.user:
+        name: "{{ item.login }}"
+        group: "{{ item.group }}"
+        groups: "{{ item.groups }}"
+        password: "{{ item.password | password_hash('sha512','bidule') }}"
+      loop: "{{ logins }}"
+      no_log: false
