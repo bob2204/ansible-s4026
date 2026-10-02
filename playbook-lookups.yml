@@ -1,0 +1,31 @@
+---
+- name: Découvert des lookups
+  hosts: deby-cli
+
+  vars:
+    rennes: Autocad
+    toulouse: Ansible
+    lyon: Excel
+
+    centre: toulouse
+
+  tasks:
+    - name: Dig
+      ansible.builtin.debug:
+        msg: "kernel.org: {{ lookup('dig','kernel.org') }}"
+
+    - name: env
+      ansible.builtin.debug:
+        msg: "PATH: {{ lookup('env','PATH') }}"
+
+    - name: file
+      ansible.builtin.debug:
+        msg: "hosts.txt: {{ (lookup('file','/tmp/hosts.txt') | split('\n'))[-1] }}"
+
+    - name: template
+      ansible.builtin.debug:
+        msg: "hosts.txt: {{ lookup('template','templates/hosts.txt') }}"
+
+    - name: vars
+      ansible.builtin.debug:
+        msg: "{{ centre }}: {{ lookup('vars', centre ) }}"
