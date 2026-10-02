@@ -1,0 +1,6 @@
+{# Micro-TP n°11 #}
+{% for iface in ansible_facts['interfaces'] %}
+{% if iface != 'lo' %}
+{{ iface }}: {{ ansible_facts[iface].ipv4.address }}
+{% endif %}
+{% endfor %}
