@@ -3,6 +3,17 @@ logins:
   - login: bob
     home: /home/bob
     group: ansible
+    groups:
+      - admin
+      - devops
+      - cuisine
+      - info
+    password: azerty
   - login: alice
     home: /home/alice
     group: ansible
+    groups:
+      - garagisme
+      - ansible
+      - info
+    password: qwerty

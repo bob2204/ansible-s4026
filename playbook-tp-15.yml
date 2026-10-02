@@ -1,0 +1,7 @@
+---
+- name: Micro-TP n°15
+  hosts: deby-cli
+  become: true
+
+  roles:
+    - role: redis

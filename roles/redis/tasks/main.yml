@@ -1,0 +1,29 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/redis
+- name: Installation du paquet Redis
+  ansible.builtin.package:
+    name: redis
+    state: present
+
+- name: Paramétrage du service redis
+  ansible.builtin.systemd:
+    name: redis
+    enabled: true
+    state: started
+
+- name: Activation de l'écoute sur toutes les interfaces
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regex: ^bind 127.0.0.1
+    line: bind *
+  notify:
+    - restart_redis
+
+- name: Désactivation du mode protected
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regex: ^protected-mode yes
+    line: protected-mode no
+  notify:
+    - restart_redis
