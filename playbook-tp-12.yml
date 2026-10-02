@@ -1,0 +1,11 @@
+---
+- name: Micro-TP n°12
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Traitement du fichier local /tmp/hosts.txt
+      ansible.builtin.lineinfile:
+        dest: /etc/hosts
+        line: "{{ item }}"
+      loop: "{{ lookup('file','/tmp/hosts.txt') | split('\n') }}"
