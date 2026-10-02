@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/demo
+
+- name: Rôle demo
+  ansible.builtin.debug:
+    msg: "Rôle demo du stage {{ stage }} situé à {{ site }}"
+  changed_when: true
+  notify:
+    - call_demo

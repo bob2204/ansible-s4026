@@ -1,0 +1,8 @@
+#SPDX-License-Identifier: MIT-0
+---
+# handlers file for roles/demo
+
+- name: Handler du rôle demo
+  ansible.builtin.debug:
+    msg: "Handler du rôle demo"
+  listen: call_demo

@@ -1,0 +1,8 @@
+---
+- name: Présentation des rôles
+  hosts: all
+
+  roles:
+    - role: demo
+      stage: Docker
+      site: Paris
